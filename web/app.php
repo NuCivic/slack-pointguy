@@ -13,12 +13,15 @@ $config = array(
   'sheet' => getenv("SHEET"),
 );
 
-if ($config['token'] && $config['sheet']) {
-  // Register the monolog logging service
-  $app->register(new Silex\Provider\MonologServiceProvider(), array(
-    'monolog.logfile' => 'php://stderr',
-  ));
+// Register the monolog logging service
+$app->register(new Silex\Provider\MonologServiceProvider(), array(
+  'monolog.logfile' => 'php://stderr',
+));
 
+$app['monolog']->addDebug('token set to ' . $config['token']);
+$app['monolog']->addDebug('sheet set to ' . $config['sheet']);
+
+if ($config['token'] && $config['sheet']) {  
   $app->get('/', function() use($app) {
     return $app->json(
       array(
@@ -42,14 +45,16 @@ if ($config['token'] && $config['sheet']) {
       );
       return $app->json($response, 200);
     }
-    $app['monolog']->addDebug('incorrect token');
-    return $app->json(
-      array(
-        'reason' => 'incorrect token',
-        'text' => 'I don\'t talk post to strangers'
-      ),
-      403
-    );
+    else {
+      $app['monolog']->addDebug('incorrect token');
+      return $app->json(
+        array(
+          'reason' => 'incorrect token',
+          'text' => 'I don\'t talk post to strangers'
+        ),
+        403
+      );
+    }
   });
 $app->run();
 }
