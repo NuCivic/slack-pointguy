@@ -29,7 +29,7 @@ $app->post('/', function(Request $request) use($app, $token, $spreadsheet_url) {
     $spreadsheet = load_payroll($spreadsheet_url);
     $text = $request->get('text');
     $result = search_gotoguy($text, $spreadsheet);
-    $response_text = sprintf('The go-to-guy for %s is %s %s', $text, $result['name'], $result['slack'] );
+    $response_text = sprintf('The point-person for %s is %s %s', $text, $result['name'], $result['slack'] );
     $response = array(
       'respose_type' => 'in_channel',
       'text' => $response_text

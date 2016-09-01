@@ -10,7 +10,7 @@ $spreadsheet_url = '***REMOVED***';
  */
 function load_payroll($url) {
   if(!ini_set('default_socket_timeout', 15)) echo '<!-- unable to change socket timeout -->';
-  if (($handle = fopen($url, 'r')) !== FALSE) {
+  if (($handle = payroll_sheet('cache', $url)) !== FALSE) {
     $headers = fgetcsv($handle, 0, ',');
     while (($data = fgetcsv($handle, 0, ',')) !== FALSE) {
       $spreadsheet[] = array_combine($headers, $data);
@@ -21,6 +21,15 @@ function load_payroll($url) {
   else {
     throw new Exception('Problem reading csv', 1);
   }
+}
+
+function payroll_sheet($cache, $url, $lifetime = 120) {
+  // Generate the cache version if it doesn't exist or it's too old!
+  if(!file_exists($cache) OR (filemtime($cache) < (time() - $lifetime))) {
+    $contents = file_get_contents($url, false, $context);
+    file_put_contents($cache, $contents, LOCK_EX);
+  }
+  return fopen($cache, 'r');
 }
 
 /**

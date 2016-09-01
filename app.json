@@ -1,6 +1,6 @@
 {
-  "name": "NuCivic gotoguy ",
-  "description": "A small php app to support slack-gotoguy commands",
+  "name": "NuCivic Point Person",
+  "description": "A small php app to support slack-point-person commands",
   "repository": "https://github.com/NuCivic/slack-gotoguy",
   "addons": []
 }
