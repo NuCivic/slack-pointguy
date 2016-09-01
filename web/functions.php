@@ -1,7 +1,5 @@
 <?php
 
-$token = '***REMOVED***';
-$spreadsheet_url = '***REMOVED***';
 
 /**
  * Load list of employees

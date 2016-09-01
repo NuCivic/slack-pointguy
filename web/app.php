@@ -1,6 +1,7 @@
 <?php
 
 require('../vendor/autoload.php');
+require_once('config.php');
 require_once('functions.php');
 
 use Symfony\Component\HttpFoundation\Request;
@@ -23,12 +24,12 @@ $app->get('/', function() use($app) {
   );
 });
 
-$app->post('/', function(Request $request) use($app, $token, $spreadsheet_url) {
-  if ($request->get('token') == $token) {
+$app->post('/', function(Request $request) use($app, $config) {
+  if ($request->get('token') == $config['token']) {
     $app['monolog']->addDebug('token is correct.');
-    $spreadsheet = load_payroll($spreadsheet_url);
+    $sheet = load_payroll($config['sheet']);
     $text = $request->get('text');
-    $result = search_gotoguy($text, $spreadsheet);
+    $result = search_gotoguy($text, $sheet);
     $response_text = sprintf('The point-person for %s is %s %s', $text, $result['name'], $result['slack'] );
     $response = array(
       'respose_type' => 'in_channel',
@@ -40,7 +41,7 @@ $app->post('/', function(Request $request) use($app, $token, $spreadsheet_url) {
   return $app->json(
     array(
       'reason' => 'incorrect token',
-      'text' => 'i don\'t talk post to strangers'
+      'text' => 'I don\'t talk post to strangers'
     ),
     403
   );
