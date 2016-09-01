@@ -31,7 +31,7 @@ function payroll_sheet($cache, $url, $lifetime = 120) {
 }
 
 /**
- * Search a go to guy by looking into all the
+ * Search a go to person by looking into all the
  * columns in the sheet. In this way we can divide
  * the employee skills by areas like skills, projects, etc.
  *
@@ -41,7 +41,7 @@ function payroll_sheet($cache, $url, $lifetime = 120) {
  * @param  [type] $payroll A list of all the employees
  * @return [type]          An employee
  */
-function search_gotoguy($needle, $payroll) {
+function search_pointperson($needle, $payroll) {
   foreach ($payroll as $employee) {
     foreach ($employee as $header => $value) {
       $tags = explode(',', $value);
