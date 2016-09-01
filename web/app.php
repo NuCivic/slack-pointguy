@@ -23,7 +23,7 @@ $app->get('/', function() use($app) {
   );
 });
 
-$app->post('/', function(Request $request) use($app) {
+$app->post('/', function(Request $request) use($app, $token, $spreadsheet_url) {
   if ($request->get('token') == $token) {
     $app['monolog']->addDebug('token is correct.');
     $spreadsheet = load_payroll($spreadsheet_url);
