@@ -1,28 +1,33 @@
-# php-getting-started
+## Point person
+This is an slack slash command to look up for the person with the skills / knowgledge to answer your burning questions.
 
-A barebones PHP app that makes use of the [Silex](http://silex.sensiolabs.org/) web framework, which can easily be deployed to Heroku.
+### Configuration
+- Create a new slack slash command
+- Create a sheet with at least this columns
 
-This application supports the [Getting Started with PHP on Heroku](https://devcenter.heroku.com/articles/getting-started-with-php) article - check it out.
-
-## Deploying
-
-Install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
-
-```sh
-$ git clone git@github.com:heroku/php-getting-started.git # or clone your own fork
-$ cd php-getting-started
-$ heroku create
-$ git push heroku master
-$ heroku open
+```
+name
+slack
+tags
 ```
 
-or
+- Publish it to the web going to File > Publish to the web...
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+- Configure your app
+```
+cp web
+cp config.demo.php config.php
+vim config.php
+```
 
-## Documentation
+- Replace token with your branded new token command. 
+- Replace sheet with your payroll google sheet.
 
-For more information about using PHP on Heroku, see these Dev Center articles:
+```
+$config = array(
+  'token' => 'XEDLdo7T3QqUgsbZW8UInqUh',
+  'sheet' => 'https://docs.google.com/spreadsheet/pub?key=15Z0F9Ee6uRH4-vD1v-FuXvMB-6laF4F_m5Gsr7fhsDM&single=true&gid=0&output=csv',
+);
+```
 
-- [Getting Started with PHP on Heroku](https://devcenter.heroku.com/articles/getting-started-with-php)
-- [PHP on Heroku](https://devcenter.heroku.com/categories/php)
+- Configure web as your docroot. This depends on what web server are you using.

@@ -1,7 +1,5 @@
 <?php
 
-$token = 'XEDLdo7T3QqUgsbZW8UInqUh';
-$spreadsheet_url = 'https://docs.google.com/spreadsheet/pub?key=15Z0F9Ee6uRH4-vD1v-FuXvMB-6laF4F_m5Gsr7fhsDM&single=true&gid=0&output=csv';
 
 /**
  * Load list of employees
