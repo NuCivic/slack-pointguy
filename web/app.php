@@ -29,7 +29,7 @@ $app->post('/', function(Request $request) use($app, $config) {
     $app['monolog']->addDebug('token is correct.');
     $sheet = load_payroll($config['sheet']);
     $text = $request->get('text');
-    $result = search_gotoguy($text, $sheet);
+    $result = search_pointperson($text, $sheet);
     $response_text = sprintf('The point-person for %s is %s %s', $text, $result['name'], $result['slack'] );
     $response = array(
       'respose_type' => 'in_channel',
