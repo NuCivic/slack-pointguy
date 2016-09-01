@@ -13,6 +13,16 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
   'monolog.logfile' => 'php://stderr',
 ));
 
+$app->get('/', function() use($app) {
+  return $app->json(
+    array(
+      'reason' => 'no get',
+      'text' => 'i don\'t talk get with strangers',
+    ),
+    403
+  );
+});
+
 $app->post('/', function(Request $request) use($app) {
   if ($request->get('token') == $token) {
     $app['monolog']->addDebug('token is correct.');
@@ -30,7 +40,7 @@ $app->post('/', function(Request $request) use($app) {
   return $app->json(
     array(
       'reason' => 'incorrect token',
-      'text' => 'i don\'t talk to scriptngers'
+      'text' => 'i don\'t talk post to strangers'
     ),
     403
   );
