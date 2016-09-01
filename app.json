@@ -1,0 +1,6 @@
+{
+  "name": "NuCivic gotoguy ",
+  "description": "A small php app to support slack-gotoguy commands",
+  "repository": "https://github.com/NuCivic/slack-gotoguy",
+  "addons": []
+}
